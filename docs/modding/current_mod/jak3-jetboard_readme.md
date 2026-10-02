@@ -1,7 +1,7 @@
 # Mod Readme — Jak 3 Jetboard Mechanics Port to Jak 2
 
 > **Game:** Jak 2  
-> **Branch:** `jak2/features/jak3-jetBoard`  
+> **Repository:** [`whozghiar/jak2-mod-jak3-jetBoard`](https://github.com/whozghiar/jak2-mod-jak3-jetBoard)  
 > **Target Subsystem:** Target Jetboard (`goal_src/jak2/engine/target/board/`) & Sound Bank / Art Group Pipelines
 
 ---
@@ -11,7 +11,7 @@
 This mod ports three core Jetboard mechanics introduced in Jak 3 into Jak 2's native jetboard system:
 
 1. **Chargeable High Jump:**
-   - **Controls:** Hold `L1` (crouch on board) then release `X` / Jump.
+   - **Controls:** Hold `L1` (crouch on board) then press `X` / Jump.
    - **Behavior:** Charges dynamic upward kinetic energy and launches Jak much higher than standard board jumps (`jakb-board-jump-high-ja`). Plays dedicated charge & launch audio.
 2. **Board Zap Attack (Area-of-Effect & I-Frames):**
    - **Controls:** Press `Circle` while riding the board.
@@ -45,7 +45,7 @@ To cleanly import Jak 3 animations into Jak 2 without manual Blender edits or he
 
 ### B. Sound Bank Injection (`SBK` Tooling)
 - **`decompiler/data/extract_sbk.cpp` & `goalc/build_sbk/` :** C++ tools to extract ADPCM audio from `.SBK` banks and inject new samples via `append-sbk` macro in `project-lib.gp`.
-- **`custom_assets/jak2/sounds/sfx/MODEBORD/` :** Provides the 4 Jak 3 audio files (`BOARD_CHARGE`, `BOARD_LAUNCH`, `BOARD_ZAP`, `BOARD_ZAP_HIT`).
+- **`custom_assets/jak2/sounds/sfx/MODEBORD/` :** Holds Jak 3's extracted `MODEBORD` bank (32 sounds); `(append-sbk "BOARD" "MODEBORD" :only-names ...)` in `game.gp` appends only the 4 this mod uses (`BOARD_CHARGE`, `BOARD_LAUNCH`, `BOARD_ZAP`, `BOARD_ZAP_HIT`) to Jak 2's `BOARD.SBK`.
 
 ### C. Dynamic Art Linking & GOAL Gameplay Logic
 - **`goal_src/jak2/engine/anim/joint.gc` :** Hook inside `art-group::relocate` to dynamically link custom art groups at file load time (`link-art!`).
@@ -60,11 +60,11 @@ To cleanly import Jak 3 animations into Jak 2 without manual Blender edits or he
    ```bash
    task set-game-jak2
    ```
-2. Build custom sound assets and recompile:
+2. Extract the game assets:
    ```bash
    task extract
    ```
-3. In REPL (`task repl`), hot-recompile code:
+3. In REPL (`task repl`), hot-recompile code (this also builds the custom `BOARD.SBK` and the imported animation art groups, from `game.gp`):
    ```lisp
    (mi)
    ```
@@ -73,12 +73,12 @@ To cleanly import Jak 3 animations into Jak 2 without manual Blender edits or he
    task boot-game
    ```
 5. **Enable the mod** (it ships OFF by default — mandatory non-regression rule):
-   open the debug menu and go to **`Debug ▸ Mods ▸ jak3-jetboard ▸ Enable (master)`**.
+   press **L3 + SELECT** to open the Mods menu and go to **`Mods ▸ jak3-jetboard ▸ Enable (master)`**.
    Toggling the master ON also arms the three per-mechanic rows below it; you can
    then switch any single mechanic (`Loaded Jump` / `Zap Attack` / `Turn-Around`)
    off independently. With the master OFF the jetboard plays exactly like stock.
 6. Equip Jetboard (`R2`) and test:
-   - **Charge Jump:** Hold `L1`, release `X`.
+   - **Charge Jump:** Hold `L1`, press `X`.
    - **Zap Attack:** Press `Circle`.
    - **Quick Turn:** Press `Triangle`.
 
@@ -147,3 +147,4 @@ To cleanly import Jak 3 animations into Jak 2 without manual Blender edits or he
 | 2026-08-16 | `goal_src/jak2/engine/target/board/board-part.gc`<br>`goal_src/jak2/engine/target/board/target-board.gc`<br>`goal_src/jak2/engine/target/target-util.gc` | **Dynamic zap particle tracking, concentric multi-ring ripple & 1:1 Jak 3 parity:**<br>1. *Dynamic board tracking:* `board-zap-track` dynamically translates the active particle origin (`arg2`) to `*target*`'s board joint `(joint-node-index jakb-lod0-jg board)` on every tick, and `part-tracker-spawn` is supplied with `:callback part-tracker-track-target`. The expanding shockwave rings (`5489`) follow the jetboard synchronously in real time even at high velocity.<br>2. *Concentric ripples & Jak 3 parameter parity:* Configured `group-board-zap-attack` and particle `5489` with Jak 3's exact pulse structure (`:num 0.25`, `:length (seconds 0.335)`, `:scalevel-x (meters 0.16666667)`), emitting a train of 4 to 5 concentric expanding rings reaching 3.0m.<br>3. *Suppression of trick-spin FX:* Conditioned `target-board.gc` `'touched` handler to prevent spawning native `group-board-spin-attack` during `board-zap`.<br>4. *Collision radius parity:* Aligned `board-zap` attack collision sphere in `target-util.gc` to exact Jak 3 parameters (`12288.0` / 3.0m attack radius, `13107.2` / 3.2m root bounding sphere). | Faithfully reproduce Jak 3's zap attack visuals and hit radius while tracking the moving jetboard dynamically. |
 | 2026-08-30 | `docs/modding/current_mod/jak3-jetboard_readme.md` (relocated from `docs/mods/`)<br>removed stale `docs/jak[123]_modding_utilities.md`, `docs/jak_modding_instructions.md`, `docs/mods/README.md` | Relocated this readme to the mandated `docs/modding/current_mod/` path and cleared the pre-migration flat `docs/` tree left over on this branch (the branch predates the `docs/modding/` consolidation). Content was already bilingual with the five required sections. | Bring the file location into compliance with the modding directive. |
 | 2026-09-08 | `goal_src/jak2/pc/debug/jak3-jetboard-menu.gc` (new)<br>`goal_src/jak2/dgos/game.gd`<br>`goal_src/jak2/engine/target/board/board-h.gc`<br>`goal_src/jak2/engine/target/board/target-board.gc`<br>`goal_src/jak2/engine/target/board/board-states.gc` | **Runtime on/off via the unified Debug ▸ Mods tab (mandatory procedure).** Added 4 `#f`-by-default flags in `board-h.gc` (`*jak3-jetboard-enable*` master + `*jak3-jetboard-loaded-jump*` / `*jak3-jetboard-zap*` / `*jak3-jetboard-turn-around*`), defined in a non-debug header so the engine reads always compile. New debug-only file `jak3-jetboard-menu.gc` registers `(mods-menu-register "jak3-jetboard" …)` — `Enable (master)` uses a custom pick-func that arms/disarms all three mechanics together; the per-mechanic rows use stock `dm-boolean-toggle-pick-func`. `.o` wired into `game.gd` right after `mods-menu.o`. Every mod behaviour hook is now guarded by `(and *jak3-jetboard-enable* *jak3-jetboard-<mechanic>*)`: the Triangle turn-around trigger and L1 charge / Circle zap blocks in `target-board.gc`/`board-states.gc`, the charged-jump height bonus, the forced `sound-bank-load "board"` in `target-board-init`, **and the `jakb-board-jump-high-ja` animation branch** — that last one matters for non-regression because `unknown-word04` can legitimately exceed `20480.0` on a stock rider-platform board jump, which would otherwise swap the vanilla jump animation. With the master flag OFF the jetboard is byte-identical to stock. | Comply with CLAUDE.md golden rules #2/#3: every mod OFF by default, switchable at runtime from Debug ▸ Mods, never editing `default-menu*.gc`. |
+| 2026-10-02 | `docs/modding/current_mod/jak3-jetboard_readme.md`, `README.md` | Docs aligned with the code: Repository header instead of the archived branch; the toggle opens with L3 + SELECT (`pc/features/jak3-jetboard-menu.gc`), not `Debug ▸ Mods`; the charged jump fires on an `X` press while `L1` is held; `MODEBORD/` holds the whole Jak 3 bank, of which `append-sbk :only-names` keeps 4 sounds; `BOARD.SBK` and the imported art groups are built by `(mi)` from `game.gp`, so standard extraction is enough. | Documentation matches the shipped code. |

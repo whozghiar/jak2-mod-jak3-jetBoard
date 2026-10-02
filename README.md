@@ -1,4 +1,4 @@
-# Jak 3 Jetboard Mechanics Port to Jak 2
+# Jak 3 Jetboard — Jak 2
 
 <p align="center">
   <img src="https://img.shields.io/badge/OpenGOAL-Mod-blue.svg" alt="OpenGOAL Mod">
@@ -12,13 +12,13 @@
 > This mod moved from the `jak2/features/jak3-jetBoard` branch of [whozghiar/jak-project](https://github.com/whozghiar/jak-project) to this repository. Earlier releases stay installable from the launcher catalog.
 
 ## 📖 Overview
-Ports three signature Jetboard mechanics from Jak 3 directly into Jak 2: the Charge / Loaded Jump (`L1` + release `X`), the Circular Zap Attack (`Circle`), and the 180° Quick Turn-Around (`Triangle`) with an exit speed boost, complete with ported animations, particle VFX, and dedicated audio cues.
+Ports three signature Jetboard mechanics from Jak 3 directly into Jak 2: the Charge / Loaded Jump (`L1` + `X`), the Circular Zap Attack (`Circle`), and the 180° Quick Turn-Around (`Triangle`) with an exit speed boost, complete with ported animations, particle VFX, and dedicated audio cues.
 
 - **Target Game:** Jak 2
 - **Repository:** [`whozghiar/jak2-mod-jak3-jetBoard`](https://github.com/whozghiar/jak2-mod-jak3-jetBoard)
 
 ## ✨ Key Features
-- **Feature:** **Loaded High Jump:** Hold `L1` (crouch on board) and release `X` to charge kinetic energy and launch Jak into high jumps with charge particles and audio.
+- **Feature:** **Loaded High Jump:** Hold `L1` (crouch on board) to charge kinetic energy, then press `X` to launch Jak into high jumps with charge particles and audio.
 - **Feature:** **Circular Zap Attack:** Press `Circle` to unleash a radial electrical sweep with invincibility frames and custom sound effects.
 - **Feature:** **180° Quick Turn-Around:** Press `Triangle` to instantly snap 180 degrees and gain a forward speed boost upon exit.
 
@@ -39,8 +39,8 @@ task build-release-decomp
 ```
 
 ### 3. Asset Extraction
-- **Status:** Custom extraction required (Layer 2)
-- **Details:** Re-run extraction to process custom assets and modified decompiler configuration:
+- **Status:** Standard extraction sufficient (once per setup).
+- **Details:** The imported animations and Jak 3 sounds are built by the GOAL compiler (`build-actor` / `append-sbk` steps in `game.gp`), not by the extractor:
 ```bash
 task extract
 ```
