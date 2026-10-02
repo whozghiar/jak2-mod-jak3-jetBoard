@@ -21,7 +21,7 @@
 Ports three signature Jetboard mechanics from Jak 3 directly into Jak 2: the Charge / Loaded Jump (`L1` + release `X`), the Circular Zap Attack (`Circle`), and the 180° Quick Turn-Around (`Triangle`) with an exit speed boost, complete with ported animations, particle VFX, and dedicated audio cues.
 
 - **Target Game:** Jak 2
-- **Active Branch:** `jak2/features/jak3-jetBoard`
+- **Repository:** [`whozghiar/jak2-mod-jak3-jetBoard`](https://github.com/whozghiar/jak2-mod-jak3-jetBoard)
 
 ## ✨ Key Features
 - **Feature:** **Loaded High Jump:** Hold `L1` (crouch on board) and release `X` to charge kinetic energy and launch Jak into high jumps with charge particles and audio.
@@ -87,7 +87,7 @@ For the complete technical breakdown, architecture, and developer notes, refer t
 Porte trois mécaniques majeures du Jetboard de Jak 3 directement dans Jak 2 : le saut chargé (*Loaded Jump* avec `L1` + relâchement de `Croix`), le tacle circulaire électrique (*Board Zap* avec `Rond`) et le demi-tour instantané à 180° (*Quick Turn-Around* avec `Triangle`) suivi d'un boost d'accélération, avec animations réassignées, effets de particules et bruitages dédiés.
 
 - **Jeu Ciblé :** Jak 2
-- **Branche Active :** `jak2/features/jak3-jetBoard`
+- **Dépôt :** [`whozghiar/jak2-mod-jak3-jetBoard`](https://github.com/whozghiar/jak2-mod-jak3-jetBoard)
 
 ## ✨ Fonctionnalités Clés
 - **Fonctionnalité :** **Saut Chargé (Loaded Jump) :** Maintenez `L1` pour vous accroupir sur le Jetboard et relâchez `Croix` pour charger l'énergie cinétique et sauter bien plus haut.
