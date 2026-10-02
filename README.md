@@ -1,4 +1,4 @@
-# Jak 3 Jetboard Mechanics Port to Jak 2 / Portage du Jetboard de Jak 3 dans Jak 2
+# Jak 3 Jetboard Mechanics Port to Jak 2
 
 <p align="center">
   <img src="https://img.shields.io/badge/OpenGOAL-Mod-blue.svg" alt="OpenGOAL Mod">
@@ -6,13 +6,7 @@
   <img src="https://img.shields.io/badge/AI--assisted-Modding-purple.svg" alt="AI Assisted">
 </p>
 
-<p align="center">
-  <a href="#-english-version"><b>🇬🇧 English Version</b></a> &nbsp;•&nbsp; <a href="#-version-française"><b>🇫🇷 Version Française</b></a>
-</p>
-
 ---
-
-# 🇬🇧 English Version
 
 > [!NOTE]
 > This mod moved from the `jak2/features/jak3-jetBoard` branch of [whozghiar/jak-project](https://github.com/whozghiar/jak-project) to this repository. Earlier releases stay installable from the launcher catalog.
@@ -77,73 +71,6 @@ individually. Turn the master OFF to fully restore stock jetboard behaviour.
 
 ## 📖 Technical Documentation
 For the complete technical breakdown, architecture, and developer notes, refer to:
-- 📄 [`docs/modding/current_mod/jak3-jetboard_readme.md`](docs/modding/current_mod/jak3-jetboard_readme.md)
-
----
-
-# 🇫🇷 Version Française
-
-## 📖 Présentation du Mod
-Porte trois mécaniques majeures du Jetboard de Jak 3 directement dans Jak 2 : le saut chargé (*Loaded Jump* avec `L1` + relâchement de `Croix`), le tacle circulaire électrique (*Board Zap* avec `Rond`) et le demi-tour instantané à 180° (*Quick Turn-Around* avec `Triangle`) suivi d'un boost d'accélération, avec animations réassignées, effets de particules et bruitages dédiés.
-
-- **Jeu Ciblé :** Jak 2
-- **Dépôt :** [`whozghiar/jak2-mod-jak3-jetBoard`](https://github.com/whozghiar/jak2-mod-jak3-jetBoard)
-
-## ✨ Fonctionnalités Clés
-- **Fonctionnalité :** **Saut Chargé (Loaded Jump) :** Maintenez `L1` pour vous accroupir sur le Jetboard et relâchez `Croix` pour charger l'énergie cinétique et sauter bien plus haut.
-- **Fonctionnalité :** **Tacle Circulaire (Zap Attack) :** Appuyez sur `Rond` pour déclencher une décharge électrique radiale à 360° avec frames d'invincibilité et bruitages dédiés.
-- **Fonctionnalité :** **Changement de Direction Rapide (180° Turn) :** Appuyez sur `Triangle` pour pivoter instantanément à 180° et repartir immédiatement avec un boost de vitesse.
-
-## 🚀 Guide Pas à Pas pour Lancer le Mod
-
-### 1. Sélectionner le Jeu Actif
-Assurez-vous que l'environnement cible Jak 2 :
-```bash
-task set-game-jak2
-```
-
-### 2. Compilation des Binaires
-- **Statut :** Requise (Couche 1 & Couche 2 — Décompilateur & Runtime)
-- **Détails :** Compile le runtime, le compilateur et le décompilateur nécessaires à l'extraction des assets :
-```bash
-task build-release-game
-task build-release-decomp
-```
-
-### 3. Extraction des Données (Assets)
-- **Statut :** Extraction personnalisée requise (Couche 2)
-- **Détails :** Relancez l'extraction pour intégrer les assets modifiés et la configuration du décompilateur :
-```bash
-task extract
-```
-
-### 4. Lancer le Jeu
-Lancez le jeu nativement :
-```bash
-task boot-game
-```
-*(Ou itérez rapidement via le REPL OpenGOAL avec `task repl`, puis rechargez à chaud avec `(mi)` et `(r)`).*
-
-### 5. Activer le Mod (DÉSACTIVÉ par défaut)
-Ce mod est livré **désactivé** — une installation neuve se joue exactement comme
-le Jak 2 d'origine. Appuyez sur **L3 + SELECT** en jeu pour ouvrir le menu unifié **Mods** (fonctionne en boot normal, sans mode debug) et allez dans :
-
-```
-Mods ▸ jak3-jetboard ▸ Enable (master)
-```
-
-Activer l'interrupteur maître arme aussi les trois mécaniques (`Loaded Jump`,
-`Zap Attack`, `Turn-Around`), chacune pouvant ensuite être désactivée
-individuellement. Repassez le maître sur OFF pour rétablir intégralement le
-comportement d'origine du jetboard.
-
-## 🎥 Encart Vidéo Démonstrative
-[![Demonstration Video](https://img.youtube.com/vi/y-s5oj6Bimo/maxresdefault.jpg)](https://youtu.be/y-s5oj6Bimo)
-
-▶️ **[Visionner la vidéo de démonstration sur YouTube](https://youtu.be/y-s5oj6Bimo)**
-
-## 📖 Documentation Technique
-Pour l'audit technique approfondi, l'architecture et les détails d'implémentation, consultez :
 - 📄 [`docs/modding/current_mod/jak3-jetboard_readme.md`](docs/modding/current_mod/jak3-jetboard_readme.md)
 
 ---
