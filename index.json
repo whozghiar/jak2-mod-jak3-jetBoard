@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "sourceName": "Jak 3 Jetboard Source",
-  "lastUpdated": "2026-10-02T13:47:39Z",
+  "lastUpdated": "2026-10-02T14:16:44Z",
   "mods": {
     "jak3-jetBoard": {
       "displayName": "Jak 3 Jetboard",
@@ -16,7 +16,7 @@
       "supportedGames": [
         "jak2"
       ],
-      "websiteUrl": "https://github.com/whozghiar/jak2-jak3-jetBoard",
+      "websiteUrl": "https://github.com/whozghiar/jak2-mod-jak3-jetBoard",
       "versions": [
         {
           "version": "1.0.0",
@@ -34,8 +34,8 @@
           }
         }
       ],
-      "coverArtUrl": "https://raw.githubusercontent.com/whozghiar/jak2-jak3-jetBoard/main/docs/img/mod/mod_cover.png",
-      "thumbnailArtUrl": "https://raw.githubusercontent.com/whozghiar/jak2-jak3-jetBoard/main/docs/img/mod/mod_cover.png"
+      "coverArtUrl": "https://raw.githubusercontent.com/whozghiar/jak2-mod-jak3-jetBoard/main/docs/img/mod/mod_cover.png",
+      "thumbnailArtUrl": "https://raw.githubusercontent.com/whozghiar/jak2-mod-jak3-jetBoard/main/docs/img/mod/mod_cover.png"
     }
   },
   "texturePacks": {}
